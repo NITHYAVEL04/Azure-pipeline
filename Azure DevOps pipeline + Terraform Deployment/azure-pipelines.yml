@@ -35,7 +35,13 @@ stages:
 
           terraform init
           terraform validate
-          terraform plan -out=tfplan
+          terraform plan -out=$(Build.ArtifactStagingDirectory)/tfplan
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Plan File'
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)/tfplan'
+        artifactName: 'tfplan-artifact'
 
 - stage: TerraformApply
   displayName: 'Terraform Apply'
@@ -44,6 +50,13 @@ stages:
   jobs:
   - job: Apply
     steps:
+    - task: DownloadPipelineArtifact@2
+      displayName: 'Download Plan File'
+      inputs:
+        buildType: 'current'
+        artifactName: 'tfplan-artifact'
+        targetPath: '$(workingDir)'
+
     - task: AzureCLI@2
       displayName: 'Install Terraform & Run Apply'
       inputs:
