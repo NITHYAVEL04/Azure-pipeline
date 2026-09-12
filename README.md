@@ -1,30 +1,12 @@
 Azure Linux Web App Deployment with Terraform & Azure DevOps PipelinesAn end-to-end Infrastructure as Code (IaC) project automating the deployment of a managed Linux Web App on Microsoft Azure using Terraform and multi-stage Azure DevOps CI/CD Pipelines.
 
 📋 Table of Contents
-   1. Architecture Overview
-   2. Project Structure
-   3. Prerequisites
-   4. Setup & Deployment Steps
-   5. CI/CD Pipeline Workflow
-   6. Troubleshooting & Lessons Learned
-   
-   
-🏛️ Architecture Overview
-   
-   [ Developer / Git Push ]
-          │
-          ▼
-   [ GitHub Repo ] ──(Triggers)──► [ Azure DevOps Pipeline ]
-                                          │
-                               (Authenticates via SPN)
-                                          │
-                                          ▼
-                               [ Azure Cloud Platform ]
-                              ┌───────────┴───────────┐
-                              ▼                       ▼
-                     [ Azure Storage ]       [ Azure Web App ]
-                     (Remote State File)    (Host Application)
 
+   1. Prerequisites
+   2. Setup & Deployment Steps
+   3. CI/CD Pipeline Workflow
+   4. Troubleshooting & Lessons Learned
+   
                      
 This project provisions and manages the following components:
   1.Infrastructure as Code (IaC): Terraform scripts written in HCL to declare cloud resources dynamically.
@@ -36,14 +18,6 @@ This project provisions and manages the following components:
      * Azure App Service Plan (asp-project20-free)
      * Azure Linux Web App (app-nithya-devops-20)
      
-📁 Project StructurePlaintext.
-
-├── Azure DevOps pipeline + Terraform Deployment/
-│   ├── main.tf              # Defines Azure Provider, Resource Group, App Service Plan, and Linux Web App
-│   ├── variables.tf         # Variable declarations (Region, RG Name, SKU configurations)
-│   ├── terraform.tfvars     # Environment-specific parameter values
-│   └── azure-pipelines.yml  # Multi-stage CI/CD pipeline definition
-└── README.md                # Project documentation
 
 
 ⚡ Prerequisites
